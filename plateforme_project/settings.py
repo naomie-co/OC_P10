@@ -84,11 +84,14 @@ WSGI_APPLICATION = 'plateforme_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'plateforme',
-    }
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': '',
+        'USER': 'postgres',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
+    },
 }
-
 
 
 # Password validation
