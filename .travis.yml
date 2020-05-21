@@ -6,8 +6,9 @@ python:
 install:
   - pip install -r requirements.txt
 
-env:
-  - S_KEY = "sndjnqfknfjdnunq8866j"
+services:
+  -postgresql
+
 # command to run tests
 script:
   - chmod +x manage.py
