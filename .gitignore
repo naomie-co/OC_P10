@@ -11,3 +11,7 @@ plateforme_project/search/__pycache__/
 plateforme_project/search/migrations/__pycache__/
 .coverage
 geckodriver.log
+project_OC_10.sublime-workspace
+project_OC_10.sublime-project
+production.py
+plateforme_project/staticfiles/
