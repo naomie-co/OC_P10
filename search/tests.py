@@ -167,10 +167,6 @@ class SearchText(StaticLiveServerTestCase):
         self.assertEqual(2, result)
 
 
-    def tearDown(self):
-        # close the browser window
-        self.driver.quit()
-
     def test_search_user_log(self):
         """Test if a user is logged in, the search page displays a backup
         button"""

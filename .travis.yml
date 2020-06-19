@@ -10,7 +10,7 @@ before_install:
   - export PATH=$PATH:usr/bin/geckodriver
 
 env:
-  - moz_headless=1
+  - MOZ_HEADLESS=1
 
 # command to install dependencies
 install:
