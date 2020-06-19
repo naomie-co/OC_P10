@@ -85,8 +85,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'plateforme',
-        'USER': 'postgres',
-        'PASSWORD': '',
+        'USER': 'naomieco',
+        'PASSWORD': 'firefighter77@',
         'HOST': '',
         'PORT': '5432',
     },
@@ -133,5 +133,5 @@ STATIC_URL = '/static/'
 
 INTERNAL_IPS = ['127.0.0.1']
 
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
