@@ -5,8 +5,8 @@ python:
 
 before_install:
   - sudo apt-get install xvfb
-  - wget https://github.com/mozilla/geckodriver/releases/download/v0.19.0/geckodriver-v0.19.0-linux64.tar.gz
-  - sudo tar -xzf geckodriver-v0.19.0-linux64.tar.gz -C /usr/bin
+  - wget https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz
+  - sudo tar -xzf geckodriver-v0.26.0-linux64.tar.gz -C /usr/bin
   - export PATH=$PATH:usr/bin/geckodriver
 
 env:
@@ -18,7 +18,7 @@ install:
 
 
 addons:
-  - firefox: "56.0"
+  - firefox: latest
 
 services:
   - postgresql
