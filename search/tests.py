@@ -138,8 +138,7 @@ class SearchText(StaticLiveServerTestCase):
         self.user.save()
 
         # create a new Firefox session
-        self.driver = webdriver.Firefox(
-        executable_path=r'C:\\Program Files\\geckodriver\\geckodriver.exe')
+        self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(30)
         self.driver.maximize_window()
         # navigate to the application home page
