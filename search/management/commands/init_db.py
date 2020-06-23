@@ -60,22 +60,30 @@ class Command(BaseCommand):
         insert into the op_food table"""
         categories = categorie()
         categories = categorie.objects.all()
+        product = op_food()
+        product = op_food.objects.all()
         for cat in categories:
             for value in self.request_product(cat.name):
                 new_values = op_food(categorie=cat, \
                 name=value[0], nutriscore=value[1], ingredient=value[2], \
                 picture_100g=value[3], picture=value[4], url=value[5])
-                new_values.save()
+                if value[0] in product.name:
+               	    continue
+               	else:
+                    new_values.save()
 
-    def delete_data(self):
-        """Delete data from categorie, op_food and substitute tables"""
-        categorie.objects.all().delete()
-        op_food.objects.all().delete()
-        substitute.objects.all().delete()
+    # def delete_data(self):
+    #     """Delete data from categorie, op_food and substitute tables"""
+    #     categorie.objects.all().delete()
+    #     op_food.objects.all().delete()
+    #     substitute.objects.all().delete()
 
     def handle(self, *args, **options):
         """Delete data then fill the database
         """
-        self.delete_data()
-        self.categorie_db()
-        self.search_product()
+        if categorie.objects.count() == 0: 
+            # self.delete_data()
+            self.categorie_db()
+            self.search_product()
+        else:
+        	self.search_product()
