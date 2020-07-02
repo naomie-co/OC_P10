@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'search',
     'account',
-    'django_cron',
 ]
 
 MIDDLEWARE = [

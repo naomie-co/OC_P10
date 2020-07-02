@@ -51,7 +51,7 @@ class Command(BaseCommand):
                 if i > 40:
                     break
             except KeyError:
-                print("Erreur dans la réception des données : ", val)
+                print("Erreur dans la réception des données")
         return data
 
     def search_product(self):
@@ -60,30 +60,33 @@ class Command(BaseCommand):
         insert into the op_food table"""
         categories = categorie()
         categories = categorie.objects.all()
-        product = op_food()
-        product = op_food.objects.all()
         for cat in categories:
             for value in self.request_product(cat.name):
-                new_values = op_food(categorie=cat, \
+                new_values = op_food.objects.update_or_create(categorie=cat, \
                 name=value[0], nutriscore=value[1], ingredient=value[2], \
                 picture_100g=value[3], picture=value[4], url=value[5])
-                if value[0] in product.name:
-               	    continue
-               	else:
-                    new_values.save()
+
+                #test to check if a product is inserted only once in the table
+                # test = op_food.objects.filter(name=value[0])
+                # print(test)
 
     # def delete_data(self):
-    #     """Delete data from categorie, op_food and substitute tables"""
-    #     categorie.objects.all().delete()
-    #     op_food.objects.all().delete()
-    #     substitute.objects.all().delete()
+        """Delete data from categorie, op_food and substitute tables"""
+        # categorie.objects.all().delete()
+        # op_food.objects.all().delete()
+        # substitute.objects.all().delete()
 
     def handle(self, *args, **options):
         """Delete data then fill the database
         """
         if categorie.objects.count() == 0: 
-            # self.delete_data()
             self.categorie_db()
             self.search_product()
         else:
         	self.search_product()
+
+
+        # self.delete_data()
+        # self.categorie_db()
+        # self.search_product()
+
