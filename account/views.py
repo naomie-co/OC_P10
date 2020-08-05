@@ -5,12 +5,13 @@ from django import forms
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-
+from sentry_sdk import capture_message
 
 class ConnexionForm(forms.Form):
     """Creates a login form"""
     username = forms.CharField(label="Nom d'utilisateur", max_length=30)
     password = forms.CharField(label="Mot de passe", widget=forms.PasswordInput)
+    #Data monitoring
 
 class SignupForm(forms.Form):
     """Create a sign up form"""
@@ -31,6 +32,8 @@ def log_in(request):
             user = authenticate(request, username=username, password=password)
             if user:
                 login(request, user)
+                #Data monitoring
+                capture_message("Connexion", level="info") 
             else: # error message
                 error = True
     else:
@@ -57,6 +60,9 @@ def sign_up(request):
                 User.objects.create_user(username=username, email=email, password=password)
                 userid = authenticate(request, username=username, password=password)
                 login(request, userid)
+                #Data monitoring
+                capture_message("Sign up", level="info")
+
             except IntegrityError:
                 error = True #variable to print an error message if the username already exists
                 form = SignupForm()

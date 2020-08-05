@@ -1,5 +1,6 @@
 envP8/
 env/
+env2/
 plateforme_project/plateforme_project/info.py
 *.pyc
 __pycache__/

@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 import logging
 from search.models import op_food, substitute
-from sentry_sdk import capture_message
 
 
 def index(request):
@@ -27,8 +26,6 @@ def products(request):
             title = "Résultats de la recherche : %s"%query
             if len(products) == 0:
                 title = "Aucun produit ne correspond aux critères de votre recherche"
-                #data monitoring
-                capture_message("Aucun résultat", level="info")
         context = {
             'products': products,
             'title': title
@@ -44,7 +41,6 @@ def products(request):
             substitute.objects.get_or_create(id_substitute=prod, user=user_id)
         except IntegrityError:
             error = True
-        logging.info("User's selection")
         return redirect('search:my_selection', user=user)
 
 

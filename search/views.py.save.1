@@ -5,7 +5,21 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 import logging
 from search.models import op_food, substitute
-from sentry_sdk import capture_message
+
+import logging
+import sentry_sdk
+from sentry_sdk.integrations.logging import LoggingIntegration
+
+# All of this is already happening by default!
+sentry_logging = LoggingIntegration(
+    level=logging.INFO,        # Capture info and above as breadcrumbs
+    event_level=logging.INFO  # Send errors as events
+)
+sentry_sdk.init(
+    dsn="PUBLIC_DSN",
+    integrations=[dsn="https://75af571d05564fa0a4824f2160e06f13@o418776.ingest.sentry.io/5324359"]
+)
+logger = logging.getLogger(__name__)
 
 
 def index(request):
@@ -27,12 +41,13 @@ def products(request):
             title = "Résultats de la recherche : %s"%query
             if len(products) == 0:
                 title = "Aucun produit ne correspond aux critères de votre recherche"
-                #data monitoring
-                capture_message("Aucun résultat", level="info")
         context = {
             'products': products,
             'title': title
         }
+        logger.info('New search', exc_info=True,  extra={
+        'request': request,
+        })
         return render(request, 'search/products.html', context)
 
     if request.method == "POST":
@@ -44,7 +59,7 @@ def products(request):
             substitute.objects.get_or_create(id_substitute=prod, user=user_id)
         except IntegrityError:
             error = True
-        logging.info("User's selection")
+        logger.info("User's selection")
         return redirect('search:my_selection', user=user)
 
 
