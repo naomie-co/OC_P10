@@ -91,7 +91,7 @@ Remplacez le lien vers geckodriver dans le fichier de tests par le vôtre.
 
 
 ## Lien vers le site
-Si vous souhaitez tester le plateforme Pur Beurre, cliquez sur ce lien :
+Si vous souhaitez tester la plateforme Pur Beurre, cliquez sur ce lien :
 	[http://64.225.70.34/]
 
 
